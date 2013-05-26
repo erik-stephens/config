@@ -1,0 +1,8 @@
+
+[ssh]
+
+enabled  = true
+port     = ssh
+filter   = sshd
+logpath  = /var/log/sshd.*
+maxretry = 6
