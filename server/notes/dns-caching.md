@@ -2,7 +2,7 @@
 DNS Caching
 ======================================================================
 
-DnsMasq Cache Settings
+Cache Settings for dnsmasq
 ----------------------------------------------------------------------
 
 The dnsmasq.conf manual page and dnsmasq.conf coments are pretty
