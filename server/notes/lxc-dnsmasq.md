@@ -1,5 +1,4 @@
-
-DnsMasq Settings Used for Hosting Linux Containers
+Using dnsmasq to Manage Guests
 ======================================================================
 
 ## Goals
