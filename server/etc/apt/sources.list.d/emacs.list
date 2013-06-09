@@ -1,5 +1,5 @@
 
 # curl http://emacs.naquadah.org/key.gpg | apt-key add -
 
-deb http://emacs.naquadah.org/ unstable/
-deb-src http://emacs.naquadah.org/ unstable/
+deb http://emacs.naquadah.org/ stable/
+deb-src http://emacs.naquadah.org/ stable/
