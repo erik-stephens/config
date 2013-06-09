@@ -1,0 +1,13 @@
+
+10.2.1.1        log1 apt1 ntp1
+10.2.1.2        log2 log apt2 apt ntp2 ntp
+10.2.1.101      fe1
+10.2.1.201      fe2 fe
+10.2.1.102      wordpress1
+10.2.1.202      wordpress2 wordpress
+10.2.1.103      sensor1
+10.2.1.203      sensor2 sensor
+10.2.1.104      build1
+10.2.1.204      build2 build
+10.2.1.105      dev1
+10.2.1.205      dev2 dev
