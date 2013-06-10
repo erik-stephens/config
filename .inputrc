@@ -1,0 +1,9 @@
+
+set bell-style none
+set editing-mode emacs
+set show-all-if-ambiguous On
+set expand-tilde On
+set completion-query-items 500
+set mark-directories On
+set mark-symlinked-directories On
+set page-completions Off
