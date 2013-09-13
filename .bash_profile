@@ -34,13 +34,22 @@ if test -x /usr/bin/dircolors; then
 fi
 
 export VIRTUAL_ENV_DISABLE_PROMPT="Get off me!"
-function virtual-ps1 {
+function python-env {
   if test x$VIRTUAL_ENV != x; then
-    echo " - virtual-env:$(basename $VIRTUAL_ENV)"
+    basename $VIRTUAL_ENV
+  else
+    echo -n system
   fi
 }
-# PS1="\n\d \t - \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$(__git_ps1 ' - \033[01;32mgit\033[0m:%s')\$(virtual-ps1)\n\! \\$ "
-PS1="\n\d \t - \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$(__git_ps1 ' - \033[01;32mgit\033[0m:%s')\n\! \\$ "
+function git-branch {
+  if test -d .git; then
+    git branch | awk '$1 == "*" { print $2 }'
+  else
+    echo -n none
+  fi
+}
+PS1="\n\d \t - \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] - git:\[\033[01;34m\]\$(git-branch)\[\033[00m\] - python:\[\033[01;34m\]\$(python-env)\[\033[00m\]\n\! \\$ "
+# PS1="\n\d \t - \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$(__git_ps1 ' - \033[01;32mgit\033[0m:%s')\n\! \\$ "
 case "$TERM" in
 xterm*|rxvt*|urxvt*)
   # If this is an xterm set the title to user@host:dir
