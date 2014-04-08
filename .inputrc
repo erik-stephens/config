@@ -7,3 +7,18 @@ set completion-query-items 500
 set mark-directories On
 set mark-symlinked-directories On
 set page-completions Off
+
+# "\M-9": start-kbd-macro
+# "\M-0": end-kbd-macro
+# "\M--": call-last-kbd-macro
+
+"\C-SPACE": set-mark
+
+"\C-x\C-x": exchange-point-and-mark
+
+"\C-w": kill-region
+
+"\C-]": character-search
+
+"\C-[": character-search-backward
+
