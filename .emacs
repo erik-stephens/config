@@ -9,6 +9,8 @@
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
+(global-set-key "\C-cd" 'dash-at-point)
+
 ;; Always ALWAYS use UTF-8
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -25,8 +27,15 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
+;; (require 'virtualenvwrapper)
+;; (venv-initialize-interactive-shells)
+;; (venv-initialize-eshell)
+;; (setq venv-location "~/.pyenv")
 
 (if (or window-system (and (>= emacs-major-version 23) (daemonp)))
     ;; We're a server
@@ -48,7 +57,7 @@
 ;; (edit-server-start)
 
 (defun my-display-buffer-function (buf not-this-window)
-  "Keep emacs from splitting the window so much."
+  "Keep Emacs from splitting BUF so much."
   (if (and (not pop-up-frames)
            (one-window-p)
            (or not-this-window
@@ -66,7 +75,7 @@
       display-buffer-reuse-frames  t)
 
 (defadvice split-window-horizontally (after rebalance-windows activate)
-  "Tell emacs to keep the windows with equal width."
+  "Tell Emacs to keep the windows with equal width."
   (balance-windows))
 (ad-activate 'split-window-horizontally)
 
@@ -131,7 +140,8 @@
 
 (delete-selection-mode 1)
 (define-key global-map [(ctrl h)]   	     'delete-backward-char)
-(define-key global-map [(meta n)]      	     'universal-argument)
+(define-key global-map [(ctrl d)]            'delete-forward-char)
+;; (define-key global-map [(meta n)]      	     'universal-argument)
 (define-key global-map [(ctrl u)]   	     'scroll-down)
 (define-key global-map [(ctrl c) <] 	     'py-shift-region-left)
 (define-key global-map [(ctrl c) >] 	     'py-shift-region-right)
@@ -167,7 +177,7 @@
       one-buffer-one-frame         nil)
 
 ; What to do when there are emacs/lisp errors.
-(setq debug-on-error nil)
+(setq debug-on-error t)
 (setq debug-on-signal nil)
 
 ; These minor modes always on unless explicitly turned on/off.
@@ -189,13 +199,13 @@
 ;;; Mode customizations.
 
 ; Subversion mode.
-(setq svn-status-default-diff-arguments '("--diff-cmd" "diff" "-x" "-wbBu"))
+; (setq svn-status-default-diff-arguments '("--diff-cmd" "diff" "-x" "-wbBu"))
 
 ; Python mode.
 (add-hook 'python-mode-hook
           '(lambda ()
-             (auto-fill-mode 0)
-             (modify-syntax-entry ?\_ "." py-mode-syntax-table)))
+             (auto-fill-mode 0)))
+;;              (modify-syntax-entry ?\_ "." py-mode-syntax-table)))
 
 ; Shell mode.
 (add-hook 'shell-mode-hook
@@ -218,6 +228,8 @@
 
 (add-to-list 'auto-mode-alist '("mako" . sgml-mode))
 (add-to-list 'auto-mode-alist '("html" . sgml-mode))
+
+(add-to-list 'auto-mode-alist '("js" . javascript-mode))
 
 ; CSS mode.
 ;; (autoload 'css-mode "css-mode")
@@ -242,6 +254,8 @@
 (setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
 (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
 
+(setq enable-recursive-minibuffers t)
+
 (setq-default c-basic-offset 2
               python-indent 4
               js-indent-level 2
@@ -256,9 +270,16 @@
 
 ;; (require 'coffee-mode)
 ;; (require 'less-css-mode)
-(require 'sws-mode)
-(require 'jade-mode)
+;; (require 'sws-mode)
+;; (require 'jade-mode)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+(require 'puppet-mode)
+(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 
 ; Make sure color codes handled correctly in compilation output and when in a shell.
 ;; (defun colorize-compilation-buffer ()
@@ -295,8 +316,8 @@
 (global-hl-line-mode 1)
 (set-face-attribute hl-line-face nil :underline t)
 
-(require 'google-translate)
-(require 'rvm)
+;; (require 'google-translate)
+;; (require 'rvm)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -305,24 +326,43 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("52b5da0a421b020e2d3429f1d4929089d18a56e8e43fe7470af2cea5a6c96443" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(global-company-mode f)
- '(server-use-tcp t))
+ '(server-use-tcp t)
+ '(virtualenv-root "~/.pyvm"))
 
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-(global-flycheck-mode t)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (global-flycheck-mode t)
 
 ;; (require 'flex-autopair)
 ;; (flex-autopair-mode t)
 
-(require 'php-mode)
-(setq php-mode-force-pear t)
-(add-hook 'php-mode-hook
-          '(lambda ()
-             (setq indent-tabs-mode t)
-             (setq tab-width 4)
-             (setq c-basic-offset 4)))
+;; (require 'php-mode)
+;; (setq php-mode-force-pear t)
+;; (add-hook 'php-mode-hook
+;;           '(lambda ()
+;;              (setq indent-tabs-mode t)
+;;              (setq tab-width 4)
+;;              (setq c-basic-offset 4)))
 
 ;; (require 'geben)
+
+(setq
+ python-shell-interpreter "ipython"
+ python-shell-interpreter-args ""
+ python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+ python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+ python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
+ python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
+ python-shell-completion-string-code  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+(require 'powershell-mode)
+(setq powershell-indent 4)
 
 (provide '.emacs)
 
 ;;; .emacs ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
