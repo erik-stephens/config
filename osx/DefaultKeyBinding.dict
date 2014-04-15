@@ -1,0 +1,87 @@
+{
+	/* This is incase there are TextExtras keybindings which
+	   bind these to some TE_indentFriendly versions		 */
+	"\U0009" = "insertTab:";
+	"\U000D" = "insertNewline:";
+	"\U007F" = "deleteBackward:";
+	"\UF728" = "deleteForward:";
+
+	"~\U007F" = "deleteWordBackward:";							/* alt-backspace */
+	"~\UF728" = "deleteWordForward:";							/* alt-delete */
+	"@\U007F" = "deleteToBeginningOfLine:";					        /* cmd-backspace */
+	"@\UF728" = "deleteToEndOfLine:";						/* cmd-delete */
+
+	"\UF72C" = "pageUp:";
+	"\UF72D" = "pageDown:";
+	"\UF729" = "moveToBeginningOfDocument:";
+	"\UF72B" = "moveToEndOfDocument:";
+
+	"$\UF72C" = "pageUpAndModifySelection:";		/* shift-page-up */
+	"$\UF72D" = "pageDownAndModifySelection:";		/* shift-page-down */
+	"~$\UF72C" = "pageUpAndModifySelection:";		/* alt-shift-page-up */
+	"~$\UF72D" = "pageDownAndModifySelection:";		/* alt-shift-page-down */
+
+	"~\UF700" = "moveToBeginningOfColumn:";							/* alt-up arrow */
+	"~\UF701" = "moveToEndOfColumn:";								/* alt-down arrow */
+	"~$\UF700" = "moveToBeginningOfColumnAndModifySelection:";		/* alt-shift-up arrow */
+	"~$\UF701" = "moveToEndOfColumnAndModifySelection:";			/* alt-shift-down arrow */
+
+	"^\U007F" = "deleteSubWordLeft:";						/* ctrl-alt-backspace */
+	"^\UF728" = "deleteSubWordRight:";						/* ctrl-alt-delete */
+	"^\UF702" = "moveSubWordLeft:";							/* ctrl-alt-left arrow */
+	"^\UF703" = "moveSubWordRight:";							/* ctrl-alt-right arrow */
+	"^$\UF702" = "moveSubWordLeftAndModifySelection:";		/* ctrl-alt-shift-left arrow */
+	"^$\UF703" = "moveSubWordRightAndModifySelection:";		/* ctrl-alt-shift-right arrow */
+
+	"^@\UF700" = "moveSelectionUp:";
+	"^@\UF701" = "moveSelectionDown:";
+	"^@\UF702" = "moveSelectionLeft:";
+	"^@\UF703" = "moveSelectionRight:";
+
+	"^~@\UF700" = "scrollLineUp:";
+	"^~@\UF701" = "scrollLineDown:";
+	"^~@\UF702" = "scrollColumnLeft:";
+	"^~@\UF703" = "scrollColumnRight:";
+
+	/* Back-tab is used to move backwards in snippet placeholders */
+	//  "\031" = "selectFollowingKeyView:";
+
+	"^A" = "enterLineAppendMode:";
+
+	"^s" = "ISIM_incrementalSearch:"; 
+	"^r" = "ISIM_reverseIncrementalSearch:"; 
+
+	"^h" = "deleteBackward:";
+	"^g" = "cancelOperation:";
+	"^w" = "cut:";
+	"~w" = "copy:";
+	"^y" = "yank:";
+	"^-" = "undo:";
+	"^ " = "setMark:";
+	"^j" = "insertNewline:";
+	"~f" = "moveWordForward:";
+	"~b" = "moveWordBackward:";
+	"~d" = "deleteWordForward:";
+	"~<" = "moveToBeginningOfDocument:";
+	"~>" = "moveToEndOfDocument:";
+	"~l" = "selectLine:";
+	"~p" = "selectParagraph:";
+	"^t" = "transpose:";
+	"~t" = "transposeWords:";
+	"^u" = "pageUp:";
+	"~i" = "scrollLineUp:";
+	"~o" = "scrollLineDown:";
+
+	"~\031" = "shiftLeft:";
+	"~\011" = "shiftRight:";
+
+	"^x" = {
+		"^c" = "quit:";
+		"h"  = "selectAll:";
+		"^f" = "openDocument:";
+		"^x" = "swapWithMark:";
+		"^m" = "selectToMark:";
+		"^s" = "saveDocument:";
+		"^w" = "saveDocumentAs:";
+	};
+}
