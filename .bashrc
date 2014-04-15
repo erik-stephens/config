@@ -37,8 +37,8 @@ fi
 
 PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin
 if on-bsd; then
-  EDITOR="~/MyApps/Emacs.app/Contents/MacOS/bin/emacsclient -c"
-  EDITOR="subl --wait"
+  EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c"
+  # EDITOR="subl --wait"
 
   # Python
   # PATH=$HOME/anaconda/bin:/usr/local/share/python3:$PATH
@@ -47,7 +47,7 @@ if on-bsd; then
   source /usr/local/bin/virtualenvwrapper.sh
 
   # Java
-  PATH=$HOME/Development/Android/sdk/platform-tools:~/Development/Android/sdk/tools:$PATH
+  # PATH=$HOME/Development/Android/sdk/platform-tools:~/Development/Android/sdk/tools:$PATH
   JAVA_HOME=$(/usr/libexec/java_home)
 
   # Ruby
@@ -55,8 +55,8 @@ if on-bsd; then
   # source ~/.rvm/scripts/rvm
 
   # Node
-  PATH=/usr/local/share/npm/bin:$PATH
-  export NODE_PATH=/usr/local/share/npm/lib/node_modules
+  # PATH=/usr/local/share/npm/bin:$PATH
+  # export NODE_PATH=/usr/local/share/npm/lib/node_modules
 else
   EDITOR="emacsclient -nw"
 fi
@@ -144,5 +144,3 @@ bind -x '"\M--":call-last-kbd-macro'
 #   stty werase undef
 #   bind -x '"\C-w":kill-region'
 # fi
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
